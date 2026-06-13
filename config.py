@@ -1,12 +1,9 @@
+import os
+
 class Config:
-    # Database Configuration
-    MYSQL_HOST = 'localhost'
-    MYSQL_USER = 'root'
-    MYSQL_PASSWORD = 'naba@123'  # Your password
-    MYSQL_DATABASE = 'student_management'
-    
-    # Secret key for sessions
-    SECRET_KEY = 'your-secret-key-here-change-this-to-something-random'
-    
-    # Other configurations
-    DEBUG = True
+    MYSQL_HOST = os.environ.get('MYSQL_HOST', 'localhost')
+    MYSQL_USER = os.environ.get('MYSQL_USER', 'root')
+    MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD', '')
+    MYSQL_DATABASE = os.environ.get('MYSQL_DATABASE', 'student_management')
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key')
+    DEBUG = os.environ.get('DEBUG', 'False') == 'True'

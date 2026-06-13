@@ -1,9 +1,12 @@
+import mysql.connector
 import os
 
-class Config:
-    MYSQL_HOST = os.environ.get('MYSQL_HOST', 'localhost')
-    MYSQL_USER = os.environ.get('MYSQL_USER', 'root')
-    MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD', 'naba@123')
-    MYSQL_DATABASE = os.environ.get('MYSQL_DATABASE', 'student_management')
-    SECRET_KEY = os.environ.get('SECRET_KEY', 'naba@kfvjihhoiojdkhyudgihhgygy')
-    DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+def get_db_connection():
+    conn = mysql.connector.connect(
+        host=os.environ.get('MYSQL_HOST', 'localhost'),
+        user=os.environ.get('MYSQL_USER', 'root'),
+        password=os.environ.get('MYSQL_PASSWORD', 'naba@123'),
+        database=os.environ.get('MYSQL_DATABASE', 'student_management'),
+        port=int(os.environ.get('MYSQL_PORT', 5000))
+    )
+    return conn

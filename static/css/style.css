@@ -1,0 +1,219 @@
+/* Header Styles */
+.header-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 0;
+    margin-bottom: 0 px;
+}
+
+.header-title {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.header-subtitle {
+    margin: 5px 0 0;
+    opacity: 0.9;
+}
+
+.header-icon {
+    background: rgba(255, 255, 255, 0.2);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.header-icon i {
+    font-size: 40px;
+    color: white;
+}
+
+/* Card Hover Effects */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Footer */
+.footer {
+    margin-top: auto;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-title {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    
+    .header-subtitle {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+    
+    .header-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 15px auto;
+    }
+    
+    .header-icon i {
+        font-size: 30px;
+    }
+}
+
+/* Alert Animations */
+.alert {
+    animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Table Styles */
+.table-hover tbody tr:hover {
+    background-color: rgba(102, 126, 234, 0.1);
+    cursor: pointer;
+}
+
+/* Button Styles */
+.btn {
+    margin-right: 5px;
+}
+
+.btn:last-child {
+    margin-right: 0;
+}
+/* Footer Styles - Complete Version */
+.main-footer {
+    background-color: #0a0c10;  /* Black/bile black */
+    color: #b9c3d4;
+    padding: 2rem 0 1rem 0;
+    margin-top: 3rem;
+    width: 100%;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 0 2rem;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-section h4 {
+    color: white;
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.footer-section h4 i {
+    margin-right: 8px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section li {
+    margin: 0.6rem 0;
+}
+
+.footer-section li i {
+    margin-right: 8px;
+    width: 24px;
+}
+
+.footer-section a {
+    color: #b9c3d4;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-section a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.footer-section p {
+    margin: 0.6rem 0;
+}
+
+.footer-section p i {
+    margin-right: 8px;
+    width: 24px;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid #2a2e3a;
+    font-size: 0.8rem;
+}
+
+/* Make footer stick to bottom */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container.mt-4 {
+    flex: 1;
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    
+    .footer-section h4 i {
+        margin-right: 5px;
+    }
+    
+    .footer-section li i {
+        margin-right: 5px;
+    }
+    
+    .footer-section p i {
+        margin-right: 5px;
+    }
+    
+    .main-footer {
+        padding: 1.5rem 0 0.8rem 0;
+    }
+}

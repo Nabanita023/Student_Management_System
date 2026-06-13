@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Enrollment</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1 class="page-title">Update Enrollment</h1>
+
+    <p class="subtitle">
+        <strong>Rahul Sharma</strong> → <strong>Python Programming</strong>
+    </p>
+
+    <form action="#" method="POST" class="form-card">
+
+        <div class="form-group">
+            <label for="status">Status</label>
+
+            <select id="status" name="status">
+                <option value="active" selected>Active</option>
+                <option value="completed">Completed</option>
+                <option value="dropped">Dropped</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="grade">Grade</label>
+
+            <input type="text"
+                   id="grade"
+                   name="grade"
+                   value="A"
+                   placeholder="e.g. A, B+, Pass">
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-warning">
+                Update
+            </button>
+
+            <a href="enrollments.html" class="btn btn-secondary">
+                Cancel
+            </a>
+        </div>
+
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Enroll Student{% endblock %}
+{% block content %}
+
+<h1 style="margin-bottom:20px;">Enroll a Student</h1>
+
+<div style="background:white; padding:30px; 
+            border-radius:10px; max-width:500px;">
+
+    <form action="/enrollments/enroll" method="POST">
+
+        <div style="margin-bottom:18px;">
+            <label style="display:block; font-weight:bold; 
+                          margin-bottom:6px;">
+                Select Student *
+            </label>
+            <select name="student_id" required
+                style="width:100%; padding:10px; 
+                       border:1px solid #ccc; border-radius:5px;">
+                <option value="">-- Choose Student --</option>
+                {% for s in students %}
+                <option value="{{ s.id }}">{{ s.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div style="margin-bottom:18px;">
+            <label style="display:block; font-weight:bold; 
+                          margin-bottom:6px;">
+                Select Course *
+            </label>
+            <select name="course_id" required
+                style="width:100%; padding:10px; 
+                       border:1px solid #ccc; border-radius:5px;">
+                <option value="">-- Choose Course --</option>
+                {% for c in courses %}
+                <option value="{{ c.id }}">{{ c.course_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:10px;">
+            <button type="submit" class="btn btn-primary">
+                Enroll
+            </button>
+            <a href="/enrollments/" class="btn btn-secondary">
+                Cancel
+            </a>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

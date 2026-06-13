@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}{{ student.name }}{% endblock %}
+{% block content %}
+
+<div style="display:flex; justify-content:space-between; 
+            align-items:center; margin-bottom:20px;">
+    <h1>{{ student.name }}</h1>
+    <a href="/students/" class="btn blue-btn">← Back</a>
+</div>
+
+<div style="background:white; padding:25px; 
+            border-radius:10px; margin-bottom:25px;">
+    <p style="padding:10px 0; border-bottom:1px solid #eee;">
+        <strong>Email:</strong> {{ student.email }}
+    </p>
+    <p style="padding:10px 0; border-bottom:1px solid #eee;">
+        <strong>Phone:</strong> {{ student.phone or 'N/A' }}
+    </p>
+    <p style="padding:10px 0; border-bottom:1px solid #eee;">
+        <strong>Address:</strong> {{ student.address or 'N/A' }}
+    </p>
+    <p style="padding:10px 0;">
+        <strong>Joined:</strong> {{ student.created_at }}
+    </p>
+</div>
+
+<h2 style="margin-bottom:15px;">Enrolled Courses</h2>
+<table style="width:100%; border-collapse:collapse; 
+              background:white; border-radius:10px;">
+    <thead style="background:#1e293b; color:white;">
+        <tr>
+            <th style="padding:12px;">Course</th>
+            <th style="padding:12px;">Duration</th>
+            <th style="padding:12px;">Fees</th>
+            <th style="padding:12px;">Status</th>
+            <th style="padding:12px;">Grade</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in enrolled_courses %}
+        <tr style="border-bottom:1px solid #eee;">
+            <td style="padding:12px;">{{ c.name }}</td>
+            <td style="padding:12px;">{{ c.duration }}</td>
+            <td style="padding:12px;">₹{{ c.fees }}</td>
+            <td style="padding:12px;">{{ c.status }}</td>
+            <td style="padding:12px;">{{ c.grade or '—' }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5" style="padding:12px; 
+                text-align:center; color:#888;">
+                Not enrolled in any course yet.
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

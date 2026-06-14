@@ -15,6 +15,7 @@ class Config:
     MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD', '')
     MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD', 'naba@123')
     MYSQL_DATABASE = os.environ.get('MYSQL_DATABASE', 'student_management')
+    MYSQL_PORT     = int(os.environ.get('MYSQL_PORT', 3306)) 
     SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key')
     SECRET_KEY = os.environ.get('SECRET_KEY', 'naba@kfvjihhoiojdkhyudgihhgygy')
     DEBUG = os.environ.get('DEBUG', 'False') == 'True'

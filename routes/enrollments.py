@@ -8,6 +8,9 @@ enrollments = Blueprint('enrollments', __name__)
 @login_required
 def list_enrollments():
     conn = get_db_connection()
+    if not conn:
+        flash('Database connection failed!', 'danger')
+        return render_template('enrollments/list.html', enrollments=[])
     cursor = conn.cursor(dictionary=True)
     cursor.execute("""
         SELECT e.*, s.name as student_name, c.name as course_name 
@@ -25,29 +28,37 @@ def list_enrollments():
 @login_required
 def enroll_student():
     conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
+    if not conn:
+        flash('Database connection failed!', 'danger')
+        return render_template('enrollments/enroll.html', students=[], courses=[])
 
-    if request.method == 'POST':
-        student_id = request.form['student_id']
-        course_id  = request.form['course_id']
-        grade      = request.form.get('grade', 'Pending')
-        cursor.execute(
-            "INSERT INTO enrollments (student_id, course_id, grade) VALUES (%s, %s, %s)",
-            (student_id, course_id, grade)
-        )
-        conn.commit()
+    cursor = conn.cursor(dictionary=True)
+    try:
+        if request.method == 'POST':
+            student_id = request.form['student_id']
+            course_id  = request.form['course_id']
+            grade      = request.form.get('grade', 'Pending')
+            cursor.execute(
+                "INSERT INTO enrollments (student_id, course_id, grade) VALUES (%s, %s, %s)",
+                (student_id, course_id, grade)
+            )
+            conn.commit()
+            flash('Student enrolled successfully!', 'success')
+            return redirect(url_for('enrollments.list_enrollments'))
+
+        cursor.execute("SELECT id, name FROM students ORDER BY name")
+        students = cursor.fetchall()
+        cursor.execute("SELECT id, name as course_name FROM courses ORDER BY name")
+        courses = cursor.fetchall()
+        return render_template('enrollments/enroll.html', students=students, courses=courses)
+
+    except Exception as e:
+        flash(f'Error: {str(e)}', 'danger')
+        return render_template('enrollments/enroll.html', students=[], courses=[])
+
+    finally:
         cursor.close()
         conn.close()
-        flash('Student enrolled successfully!', 'success')
-        return redirect(url_for('enrollments.list_enrollments'))
-
-    cursor.execute("SELECT id, name FROM students ORDER BY name")
-    students = cursor.fetchall()
-    cursor.execute("SELECT id, name as course_name FROM courses ORDER BY name")
-    courses = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return render_template('enrollments/enroll.html', students=students, courses=courses)
 
 
 @enrollments.route('/update/<int:id>', methods=['GET', 'POST'])
@@ -59,7 +70,6 @@ def update_enrollment(id):
         return redirect(url_for('enrollments.list_enrollments'))
 
     cursor = conn.cursor(dictionary=True)
-
     try:
         if request.method == 'POST':
             student_id = request.form['student_id']
@@ -73,7 +83,6 @@ def update_enrollment(id):
             flash('Enrollment updated successfully!', 'success')
             return redirect(url_for('enrollments.list_enrollments'))
 
-        # GET
         cursor.execute("""
             SELECT e.*, s.name as student_name, c.name as course_name
             FROM enrollments e
@@ -110,8 +119,11 @@ def update_enrollment(id):
 @login_required
 def update_grade(id):
     conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
+    if not conn:
+        flash('Database connection failed!', 'danger')
+        return redirect(url_for('enrollments.list_enrollments'))
 
+    cursor = conn.cursor(dictionary=True)
     try:
         if request.method == 'POST':
             grade = request.form['grade']
